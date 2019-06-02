@@ -11,6 +11,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from src import common
+import settings
 
 class QichachaPage(object):
 
@@ -37,6 +38,9 @@ class QichachaPage(object):
         self.refresh_btn = By.ID,'nc_1__btn_1'
         # 错误信息提示
         self.error_span = By.CSS_SELECTOR,'#nc_1__captcha_img_text > span'
+
+        # 验证码错误次数
+        self.max_error_times = settings.CODE_INPUT_ERROR_TIMES
 
 
     def _scroll(self,driver,offset):
@@ -80,5 +84,5 @@ class QichachaPage(object):
             if not common.is_element_exist(driver,self.error_span):
                 break
             error_times +=1
-            if error_times >=5:
+            if error_times >= self.max_error_times:
                 raise ValueError('验证码输入错误次数超过3次')

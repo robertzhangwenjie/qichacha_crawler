@@ -16,6 +16,10 @@ COMPANY_INFO_PATH_DIR= os.path.join(PROJECT_DIR,'source')
 # data路径
 COMPANY_DATA_DIR = os.path.join(PROJECT_DIR, 'data')
 
+
+# 验证码错误最大次数
+CODE_INPUT_ERROR_TIMES = 5
+
 # 登录账号
-USERNAME = '18665342227'
-PASSWORD = 'zm910214'
+USERNAME = 'user'
+PASSWORD = 'password'
