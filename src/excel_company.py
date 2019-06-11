@@ -6,6 +6,8 @@
 # @Software :   PyCharm
 import datetime
 import os
+
+import sys
 import xlrd
 from xlutils.copy import copy
 import settings
@@ -19,7 +21,13 @@ class ExcelCompany(object):
         :param excel_name: excel文件的名称
         :param file_dir: 存放数据的文件夹
         '''
-        self.file_dir = file_dir
+        date_now = datetime.datetime.now().strftime('%Y_%m_%d')
+        self.file_dir = os.path.join(file_dir,date_now)
+        # 创建一个当天的文件夹，用来存放爬取的数据
+        try:
+            os.mkdir(self.file_dir)
+        except Exception as err:
+            print(f'{self.file_dir}文件夹已存在')
         self.excel_name = excel_name
 
     def save_data(self,excel_path,company_info_list,sheet_id=0):
@@ -55,6 +63,7 @@ class ExcelCompany(object):
             company_leader = '公司法人'
             company_capital = '注册资金'
             company_date = '成立时间'
+
             company_email = '联系邮箱'
             company_phone = '联系电话'
             company_more_phone = '更多电话'
@@ -83,6 +92,7 @@ class ExcelCompany(object):
         if self.excel_name is None:
             now = datetime.datetime.now()
             self.excel_name = now.strftime('%Y-%m-%d-%H-%M-%S')
+
         file_path = os.path.join(self.file_dir,f'{self.excel_name}.xls')
         try:
             self.file.save(file_path)

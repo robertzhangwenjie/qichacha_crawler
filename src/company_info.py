@@ -33,7 +33,7 @@ class CompanyInfo(object):
         if len(company_source_excel_list) == 0:
             raise ValueError('缺少公司信息表')
         # 返回最新修改或创建的excel
-        newest_excel = os.path.join(self.company_file_path_dir,company_source_excel_list[0])
+        newest_excel = os.path.join(self.company_file_path_dir,company_source_excel_list[-1])
         return newest_excel
 
     def get_company_names(self):
