@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 # @Time     :   2019/6/2 9:24
 # @Author   :   robert
-# @FileName :   excel_company.py
+# @FileName :   company_excel.py
 # @Software :   PyCharm
 import datetime
 import os
@@ -13,7 +13,10 @@ from xlutils.copy import copy
 import settings
 from xlwt import *
 
-class ExcelCompany(object):
+class CompanyExcel(object):
+    '''
+    企业信息表对象，用来初始化创建企业信息表，写入数据等功能
+    '''
 
     def __init__(self,excel_name=None,file_dir=settings.COMPANY_DATA_DIR):
         '''
@@ -104,7 +107,7 @@ class ExcelCompany(object):
 
 
 if __name__ == '__main__':
-    excel_company = ExcelCompany('朱蒙')
+    excel_company = CompanyExcel('朱蒙')
     excel_path = excel_company.generate_excel()
 
     l = [['深圳市法本信息技术股份有限公司', '严华', '9103.1342万元人民币', '2006-11-08', 'anne.zhao@farben.com.cn', '0755-26921495', '0755-26921495-2018,0755-23633188-2017,0755-33225800-2014', '深圳市南山区学府路与科园路交汇处卫星大厦9楼901号']]

@@ -1,52 +1,50 @@
 # Crawler
 
-Crawler 是一个专门用来爬取企业信息的爬虫工具
+Crawler 是一个专门用来爬取企查查企业信息的爬虫工具，你只需要提供一个拥有企业名称的excel
 
 # 目录结构
-
-![工程目录](pics/catalog.png)
 
 - data 存放抓取后保存数据的excel
 - page 存放企查查的相关页面的PageObject
 - source 存放需要抓取的企业信息excel
 - src 存放爬取相关的文件
 - utils 存放工具文件
+- webdrivers 存放webdriver
 - settings.py 工程的全局配置文件
 - run.py 工程的路口
 
-# 文件说明
-- run.py \
-``` python
-if __name__ == '__main__':
-    from src.excel_company import ExcelCompany
+# src/*.py文件说明
 
-    base_url = 'https://www.qichacha.com'
-    scrapy = Crawler(base_url)
-    scrapy.login()
-    company = CompanyInfo()
-    # 获取需要爬取的公司列表
-    company_list = company.get_company_names()
-    # 获取公司信息表的名称
-    excel_name = company.get_excel_name().split('.')[0]
-    company_info_list = []
-    # 初始化一个data表用来保存数据，名称与source表的名称一致
-    company_excel = ExcelCompany(excel_name)
-    excel_path = company_excel.generate_excel()
+- common
+    >  判断元素是否存在 \
+    >  下一步优化目标: 验证码自动识别功能
 
-    for num,company_name in enumerate(company_list):
-        company_info = scrapy.scrpay_company_info(company_name)
-        company_info_list.append(company_info)
-        if len(company_info_list) >= 10:
-            company_excel.save_data(excel_path,company_info_list)
-            company_info_list = []
-        # 如果结束时，company_info_list的数量小于10，则把剩下的添加进去
-        if num+1 == len(company_list):
-            company_excel.save_data(excel_path,company_info_list)
- ```
+- company_basic_info
+    >   获取需要爬取的企业的基本信息，如企业名称，企业信息表名(后续存数据时默认和企业信息表名相同)等
 
-  1. 默认每爬取10条企业信息，写入一次到excel
+- company_excel
+    >   企业信息对应的excel对象，主要用来初始化excel，保存数据等功能
+
+
+- company_info
+    >   获取企业信息list
+
+- company_parser
+    >   对企业信息html进行解析
+
+- requests_executor
+    >   requests请求执行器
+
+- selenium_executor
+    >   selenium请求执行器
+
+- scrapy_engine
+    >   爬虫引擎，包含request和selenium两种引擎，运行时可以选择其中一个，推荐使用requests，更快更稳定
+
 
 # 快速开始
+
+- 使用ScrapyerWithSelenium引擎爬取
 
 1. 将需要爬取的企业信息放入到excel中,格式如下: \
      ![测试excel](pics/test_company.png) \
@@ -63,7 +61,18 @@ if __name__ == '__main__':
      > 抓取后自动生成一个excel，名称与source文件夹下的修改时间最新的一致
      > 抓取后的结果如下
 
-     ![抓取结果](pics/result.png)
+     ![抓取结果](pics/result.png) \
 
+- 使用ScrapyerWithRequests引擎爬取
 
+1. 同上面的步骤一样，准备好企业信息的excel
+
+2. 需要先手动登录，获取到登录后的cookies，然后直接运行
+```python
+if __name__ == '__main__':
+    from src.scrapy_engine import ScrapyerWithRequests, ScrapyerWithSelenium
+    cookies = 'acw_tc=7909f42815593172890043685e75a14e702b0dfcfec1e138924a4a756b; zg_did=%7B%22did%22%3A%20%2216b105fe733ab-0b47b45a8b01c8-3b604b0a-144000-16b105fe7344f9%22%7D; UM_distinctid=16b105fe75c25d-0ae12f98b15654-3b604b0a-144000-16b105fe75d93d; _uab_collina=155934785002814269355557; QCCSESSID=e1b226u9k9ep47jfps6i7vvb74; hasShow=1; Hm_lvt_3456bee468c83cc63fb5147f119f1075=1560263957,1560264137,1560560102,1560560219; acw_sc__v3=5d04bcda00cf6beca6cd9fd6642b76f954b5ed5a; acw_sc__v2=5d04bcdad4ce8f63da86d64e92374fb70e58a956; CNZZDATA1254842228=72162867-1559343956-%7C1560591556; Hm_lpvt_3456bee468c83cc63fb5147f119f1075=1560591891; zg_de1d1a35bfa24ce29bbf2c7eb17e6c4f=%7B%22sid%22%3A%201560591581997%2C%22updated%22%3A%201560591899520%2C%22info%22%3A%201560263956853%2C%22superProperty%22%3A%20%22%7B%7D%22%2C%22platform%22%3A%20%22%7B%7D%22%2C%22utm%22%3A%20%22%7B%7D%22%2C%22referrerDomain%22%3A%20%22%22%2C%22cuid%22%3A%20%22d07d0dce843c5c059aeee45c5acd4e27%22%7D'
+    runner = ScrapyerWithRequests(cookies)
+    runner.run()
+```
 

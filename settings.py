@@ -29,5 +29,5 @@ ChromeWebdriver = os.path.join(WEBDRIVER_PATH, 'chromedriver-75.exe')
 CODE_INPUT_ERROR_TIMES = 5
 
 # 登录账号
-USERNAME = 'xxx'
-PASSWORD = 'xxx'
+USERNAME = '***'
+PASSWORD = '****'

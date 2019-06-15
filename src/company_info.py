@@ -1,48 +1,59 @@
 #!/usr/bin/python3
 # -*- coding:utf-8 -*-
-# @Time     :   2019/6/1 7:54
+# @Time     :   2019/6/15 19:14
 # @Author   :   robert
 # @FileName :   company_info.py
 # @Software :   PyCharm
-import os
-
-from utils.excel_handler import ExcelHandler
-import settings
 
 
-class CompanyInfo(object):
-    def __init__(self,company_file_dir=settings.COMPANY_INFO_PATH_DIR,sheet_id=0):
-        self.company_file_path_dir = company_file_dir
-        self.sheet_id = sheet_id
-        self.excel_newest = self.get_company_source_excel()
-        self.company_data_handler = ExcelHandler(file_name=self.excel_newest,sheet_id=self.sheet_id)
+from src.company_parser import CompanyInfoParser
 
-    def get_excel_name(self):
-        return os.path.basename(self.get_company_source_excel())
 
-    def get_company_source_excel(self):
-        company_source_list = os.listdir(self.company_file_path_dir)
-        # 初始化一个excel的列表
-        company_source_excel_list = []
-        # 对文件进行排序，并去非excel文件
-        for file in company_source_list:
-            if file.endswith('xls') or file.endswith('xlsx'):
-               company_source_excel_list.append(file)
-        # 按照文件修改时间进行排序
-        company_source_excel_list.sort(key=lambda fn:os.path.getmtime(os.path.join(self.company_file_path_dir,fn)))
-        if len(company_source_excel_list) == 0:
-            raise ValueError('缺少公司信息表')
-        # 返回最新修改或创建的excel
-        newest_excel = os.path.join(self.company_file_path_dir,company_source_excel_list[-1])
-        return newest_excel
 
-    def get_company_names(self):
-        # 获取要抓取的所有公司名称,获取第一列的值
-        self.company_names = self.company_data_handler.get_col_data(0)
-        # 去掉excel的第一行的"公司名称"
-        self.company_names.pop(0)
-        return self.company_names
 
-if __name__ == '__main__':
-    company_info = CompanyInfo()
-    print(company_info.get_excel_name())
+
+def get_company_infos(company_info_html):
+    '''
+    根据传入的对象，获取企业的相关信息
+    :param company_info_html: 公司信息的html_str或者是bs.element.Tag对象
+    :return: 公司信息的list
+    '''
+    # 初始化公司信息
+    company_info_list = []
+    company_info = CompanyInfoParser(company_info_html)
+
+    # 公司名称
+    company_name = company_info.name
+    company_info_list.append(company_name)
+
+    # 法人代表
+    company_legal_person = company_info.leader
+    company_info_list.append(company_legal_person)
+
+    # 注册资金
+    company_registered_capital = company_info.registry_capital
+    company_info_list.append(company_registered_capital)
+
+    # 成立日期
+    company_registered_date = company_info.registry_date
+    company_info_list.append(company_registered_date)
+
+    # 邮箱
+    company_email = company_info.email
+    company_info_list.append(company_email)
+
+    # 电话
+    company_phone = company_info.phone
+    company_info_list.append(company_phone)
+
+    # 更多电话
+    company_more_phone = company_info.more_phone
+    company_info_list.append(company_more_phone)
+
+    # 地址
+    company_addr = company_info.addr
+    company_info_list.append(company_addr)
+
+    print(company_info_list)
+    return company_info_list
+
