@@ -30,7 +30,7 @@ class CompanyExcel(object):
         try:
             os.mkdir(self.file_dir)
         except Exception as err:
-            print(f'{self.file_dir}文件夹已存在')
+            print(f'{self.file_dir}文件夹已存在，直接使用')
         self.excel_name = excel_name
 
     def save_data(self,excel_path,company_info_list,sheet_id=0):
@@ -84,6 +84,7 @@ class CompanyExcel(object):
         :param excel_name:
         :return:
         '''
+        print('开始初始化企业excel')
         # 指定开打excel的格式为utf-8
         self.file = Workbook(encoding='utf-8')
         # 添加一个sheet，默认为'公司信息'

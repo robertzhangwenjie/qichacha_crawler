@@ -33,6 +33,7 @@ class Scrapyer(object):
         获取需要抓取的公司的基本信息
         :return:公司信息的一个字典
         '''
+        print('获取爬取对象的基本信息')
         company_info_dict = {}
         # 创建一个公司信息对象
         company = CompanyBasicInfo()
