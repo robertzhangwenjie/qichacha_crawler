@@ -6,7 +6,6 @@
 # @Software :   PyCharm
 import bs4
 import requests
-from Tools.demo.ss1 import center
 from bs4 import BeautifulSoup
 import lxml
 

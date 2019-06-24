@@ -4,7 +4,7 @@
 # @Author   :   robert
 # @FileName :   scrapy_engine.py
 # @Software :   PyCharm
-from src.company_basic_info import CompanyBasicInfo
+from src.company_source_info import CompanyBasicInfo
 from src.company_info import get_company_infos
 from src.selenium_executor import ScraperWithSelenium
 from src.company_excel import CompanyExcel
@@ -25,7 +25,8 @@ class Scrapyer(object):
 
         # 用来解析html或者element.Tag获取公司信息
         self.get_info_by_html = get_company_infos
-        self.cookies = cookies if cookies else None
+        self.cookies = cookies
+        # 初始化信息提取函数
         self.get_info_func = get_info_func
 
     def _get_company_info(self):

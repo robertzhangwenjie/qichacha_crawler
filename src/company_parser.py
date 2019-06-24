@@ -6,7 +6,6 @@
 # @Software :   PyCharm
 import json
 import re
-import pickle
 
 import bs4
 from bs4 import BeautifulSoup

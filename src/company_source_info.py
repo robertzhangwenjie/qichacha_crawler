@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 # @Time     :   2019/6/1 7:54
 # @Author   :   robert
-# @FileName :   company_basic_info.py
+# @FileName :   company_source_info.py
 # @Software :   PyCharm
 import os
 
@@ -44,7 +44,9 @@ class CompanyBasicInfo(object):
         self.company_names = self.company_data_handler.get_col_data(0)
         # 去掉excel的第一行的"公司名称"
         self.company_names.pop(0)
-        return self.company_names
+        # 去掉空企业
+        res = filter(None,self.company_names)
+        return list(res)
 
 if __name__ == '__main__':
     company_info = CompanyBasicInfo()

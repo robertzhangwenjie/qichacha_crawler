@@ -1,0 +1,20 @@
+os: linux
+sudo: false
+language: python
+
+python:
+  - "3.6"
+install:
+  - pip install pipenv --upgrade-strategy=only-if-needed
+  - pipenv install --dev --skip-lock
+  - pip install -r requirements.txt
+script:
+  - pipenv run coverage run --source=src -m unittest discover
+cache:
+  - pip
+branches:
+  only:
+    - master
+
+notifications:
+  email: false

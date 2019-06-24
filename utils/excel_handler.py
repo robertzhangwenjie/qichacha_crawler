@@ -8,7 +8,6 @@ import os
 
 import xlrd
 
-import settings
 
 
 class ExcelHandler(object):

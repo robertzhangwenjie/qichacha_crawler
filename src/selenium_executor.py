@@ -16,7 +16,7 @@ from page.qichacha_home import QichachaHome
 from page.qichacha_verify import QichachaVerifyPage
 from src.company_info import get_company_infos
 from src.company_parser import CompanyInfoParser
-from src.company_basic_info import CompanyBasicInfo
+from src.company_source_info import CompanyBasicInfo
 import settings
 
 class ScraperWithSelenium(object):
