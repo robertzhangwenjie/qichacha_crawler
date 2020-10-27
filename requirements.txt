@@ -4,7 +4,7 @@ bs4==0.0.1
 certifi==2018.8.24
 cffi==1.11.5
 chardet==3.0.4
-cryptography==2.3.1
+cryptography==3.2
 idna==2.7
 lxml==4.2.5
 Pillow==6.2.0
