@@ -1,0 +1,23 @@
+os: linux
+sudo: false
+language: python
+
+python:
+  - "3.6"
+install:
+  - pip install -r requirements.txt
+  - pip install codecov
+script:
+  - python run.py
+  - codecov
+cache:
+  - pip
+branches:
+  only:
+    - master
+
+after_success:
+  - codecov --token=91e0a513-25af-4fe5-98b5-90fff55d8cd1
+
+notifications:
+  email: false

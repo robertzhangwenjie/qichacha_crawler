@@ -1,0 +1,4 @@
+src/debug.log
+__pycache__/
+venv
+.idea
