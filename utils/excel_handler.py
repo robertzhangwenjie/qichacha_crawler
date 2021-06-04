@@ -9,16 +9,15 @@ import os
 import xlrd
 
 
-
 class ExcelHandler(object):
-    def __init__(self,file_name,sheet_id):
+    def __init__(self, file_name, sheet_id):
         self.file_name = file_name
         self.sheet_id = sheet_id
         self.sheet_data = self.get_sheet_data(self.sheet_id)
 
     # 获取sheet的内容
-    def get_sheet_data(self,sheet_id):
-        if isinstance(sheet_id,int) and sheet_id >= 0:
+    def get_sheet_data(self, sheet_id):
+        if isinstance(sheet_id, int) and sheet_id >= 0:
             sheet_id = sheet_id
         else:
             raise ValueError("sheet_id must be integer")
@@ -27,10 +26,9 @@ class ExcelHandler(object):
         return sheet_data
 
     # 获取整列的值
-    def get_col_data(self,col_id):
+    def get_col_data(self, col_id):
         col_data = self.sheet_data.col_values(col_id)
         return col_data
-
 
 
 if __name__ == '__main__':

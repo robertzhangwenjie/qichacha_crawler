@@ -10,18 +10,20 @@ import re
 import bs4
 from bs4 import BeautifulSoup
 
+
 class Company(object):
     '''
         企业信息解析对象，对传入的html或者element.Tag对象进行解析
     '''
 
-    def __init__(self,company_html):
+    def __init__(self, company_html):
         '''
         :param company_html: 传入公司的html对象或者bs4.element.Tag对象
         '''
-        self.bs = BeautifulSoup(company_html,'html.parser') if not isinstance(company_html, bs4.element.Tag) else company_html
-        self.company_info = self.bs.find("div",class_="maininfo")
-        self.relate_info = self.company_info.find_all("span",class_="val")
+        self.bs = BeautifulSoup(company_html, 'html.parser') if not isinstance(company_html,
+                                                                               bs4.element.Tag) else company_html
+        self.company_info = self.bs.find("div", class_="maininfo")
+        self.relate_info = self.company_info.find_all("span", class_="val")
 
     @property
     def name(self):
@@ -30,7 +32,7 @@ class Company(object):
         :return:
         '''
         try:
-            company_name = self.company_info.find("a",class_="title").text
+            company_name = self.company_info.find("a", class_="title").text
         except Exception as err:
             print(f'找不到企业名称:{err}')
             company_name = '-'
@@ -87,7 +89,7 @@ class Company(object):
     @property
     def email(self):
         try:
-            company_email = self.company_info.find("a",class_="val").text
+            company_email = self.company_info.find("a", class_="val").text
         except Exception as err:
             print(f'找不到企业邮箱:{err}')
             company_email = '-'
@@ -96,7 +98,7 @@ class Company(object):
     @property
     def more_phone(self):
         try:
-            company_more_phone_attr =self.company_info[1].find('a')['onclick']
+            company_more_phone_attr = self.company_info[1].find('a')['onclick']
             # 正则匹配初更多电话的一个json字符串
             _more_phone_list = re.search(r'\[(.*?)\]', company_more_phone_attr).group()
             # 反序列化为python的list
@@ -189,5 +191,7 @@ class Company(object):
 
         print(company_info_list)
         return company_info_list
+
+
 if __name__ == '__main__':
     pass

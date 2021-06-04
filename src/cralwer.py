@@ -18,7 +18,7 @@ class Cralwer(object):
     scrapy engine base class
     '''
 
-    def __init__(self,get_info_func,cookies=None):
+    def __init__(self, get_info_func, cookies=None):
         '''
 
         :param get_info_func:不同引擎用来获取公司基本信息的函数
@@ -53,7 +53,7 @@ class Cralwer(object):
 
         return company_info_dict
 
-    def _save_company_info(self,company_info_dict,get_info_func):
+    def _save_company_info(self, company_info_dict, get_info_func):
         '''
 
         :param company_info_dict: 公司的基本信息字典
@@ -91,20 +91,21 @@ class Cralwer(object):
         __company_info__dict = self._get_company_info()
         self._save_company_info(__company_info__dict, self.get_info_func)
 
+
 class ScrapyerWithRequests(Cralwer):
     '''
     使用requests库进行爬取
     '''
 
-    def __init__(self,cookies,search_url):
+    def __init__(self, cookies, search_url):
         '''
         :param cookies: 需要传递登录后的cookies
         '''
         self.cookies = cookies
         self.search_url = search_url
-        super().__init__(self._get_info,self.cookies)
+        super().__init__(self._get_info, self.cookies)
 
-    def _get_info(self,company_name):
+    def _get_info(self, company_name):
         '''
         根据公司名称，发起请求获得公司的基本信息
         :param company_name:
@@ -128,10 +129,6 @@ class ScrapyerWithRequests(Cralwer):
             print(f'获取 {company_name} 信息失败，url："{url}"')
             company_bs = ''
         return company_bs
-
-
-
-
 
 
 if __name__ == '__main__':
