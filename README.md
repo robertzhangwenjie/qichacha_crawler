@@ -1,10 +1,12 @@
 # Crawler
 ![Build Status](https://travis-ci.org/robertzhangwenjie/qichacha_crawler.svg?branch=master) \
 Crawler 是一个专门用来爬取企查查企业信息的爬虫工具，你只需要提供一个拥有企业名称的excel
-
+ 
 # 注意
-- master代码已经失效，现已更新v2版本，请切换分支为[v2](https://github.com/robertzhangwenjie/qichacha_crawler/tree/v2)
-- 目前已实现全自动爬取，无需人工干预，只需要提前注册好账号即可，采用新的框架scrapy完成，地址：[scrapy_example](https://github.com/robertzhangwenjie/scrapy_example)
+<s>master代码已经失效，现已更新v2版本，请切换分支为[v2](https://github.com/robertzhangwenjie/qichacha_crawler/tree/v2)</s>
+目前已实现全自动爬取，无需人工干预，只需要提前注册好账号即可，采用新的框架scrapy完成，地址：[scrapy_example](https://github.com/robertzhangwenjie/scrapy_example)
+
+
 # 目录结构
 
 - data 存放抓取后保存数据的excel
