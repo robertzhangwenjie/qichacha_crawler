@@ -4,6 +4,7 @@ Crawler 是一个专门用来爬取企查查企业信息的爬虫工具，你只
 
 # 注意
 - master代码已经失效，现已更新v2版本，请切换分支为[v2](https://github.com/robertzhangwenjie/qichacha_crawler/tree/v2)
+- 目前已实现全自动爬取，无需人工干预，只需要提前注册好账号即可，采用新的框架scrapy完成，地址：[scrapy_example](https://github.com/robertzhangwenjie/scrapy_example)
 # 目录结构
 
 - data 存放抓取后保存数据的excel
