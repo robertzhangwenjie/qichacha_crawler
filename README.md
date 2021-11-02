@@ -67,6 +67,7 @@ Crawler 是一个专门用来爬取企查查企业信息的爬虫工具，你只
      > 抓取后的结果如下
 
      ![抓取结果](pics/result.png) \
+     <img src="pics/result.png" width="20">
 
 - 使用ScrapyerWithRequests引擎爬取
 
