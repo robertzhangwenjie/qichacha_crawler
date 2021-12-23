@@ -1,4 +1,4 @@
-# 本仓库代码已过时，请使用最新的实现：[scrapy_example](https://github.com/robertzhangwenjie/scrapy_example)
+# 本仓库代码已过时，请使用最新的实现：[qcc_scrapy](https://github.com/robertzhangwenjie/qcc_scrapy)
 
 
 # Crawler
