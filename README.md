@@ -1,3 +1,6 @@
+# 本仓库代码已过时，请使用最新的实现：[scrapy_example](https://github.com/robertzhangwenjie/scrapy_example)
+
+
 # Crawler
 ![Build Status](https://travis-ci.org/robertzhangwenjie/qichacha_crawler.svg?branch=master) \
 Crawler 是一个专门用来爬取企查查企业信息的爬虫工具，你只需要提供一个拥有企业名称的excel
